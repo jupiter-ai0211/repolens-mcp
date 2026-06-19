@@ -4,6 +4,42 @@ import * as vscode from "vscode";
 export const PROVIDER_ID = "repolensProvider";
 
 /**
+ * Minimal local typings for the finalized MCP server definition provider API
+ * (VS Code >= 1.101). We declare them here instead of relying on `@types/vscode`
+ * so the extension can compile against an older types/engine baseline while
+ * still running against newer hosts that expose the API at runtime. The
+ * `activate()` guard ensures we never touch these on hosts that lack the API.
+ */
+interface McpStdioServerDefinitionLike {
+  cwd?: vscode.Uri;
+}
+
+type McpStdioServerDefinitionCtor = new (
+  label: string,
+  command: string,
+  args: string[],
+  env: Record<string, string>,
+  version?: string,
+) => McpStdioServerDefinitionLike;
+
+interface McpServerDefinitionProviderLike {
+  onDidChangeMcpServerDefinitions?: vscode.Event<void>;
+  provideMcpServerDefinitions: () => McpStdioServerDefinitionLike[];
+}
+
+interface McpLanguageModelApi {
+  registerMcpServerDefinitionProvider(
+    id: string,
+    provider: McpServerDefinitionProviderLike,
+  ): vscode.Disposable;
+}
+
+interface McpVsCodeApi {
+  lm: McpLanguageModelApi;
+  McpStdioServerDefinition: McpStdioServerDefinitionCtor;
+}
+
+/**
  * Registers the RepoLens MCP server definition provider.
  *
  * When VS Code asks for server definitions, we return a single local stdio
@@ -15,9 +51,12 @@ export function registerMcpProvider(
   context: vscode.ExtensionContext,
   log: vscode.LogOutputChannel,
 ): vscode.Disposable {
+  const mcpApi = vscode as unknown as McpVsCodeApi;
+  const McpStdioServerDefinition = mcpApi.McpStdioServerDefinition;
+
   const didChange = new vscode.EventEmitter<void>();
 
-  const provider: vscode.McpServerDefinitionProvider = {
+  const provider: McpServerDefinitionProviderLike = {
     onDidChangeMcpServerDefinitions: didChange.event,
     provideMcpServerDefinitions: () => {
       const serverPath = context.asAbsolutePath("dist/server/index.js");
@@ -51,12 +90,12 @@ export function registerMcpProvider(
           `script=${serverPath})`,
       );
 
-      const definition = new vscode.McpStdioServerDefinition(
+      const definition = new McpStdioServerDefinition(
         "RepoLens MCP",
         "node",
         [serverPath],
         env,
-        "0.1.0",
+        "0.1.1",
       );
       if (root) {
         definition.cwd = vscode.Uri.file(root);
@@ -66,7 +105,7 @@ export function registerMcpProvider(
     },
   };
 
-  const registration = vscode.lm.registerMcpServerDefinitionProvider(
+  const registration = mcpApi.lm.registerMcpServerDefinitionProvider(
     PROVIDER_ID,
     provider,
   );
