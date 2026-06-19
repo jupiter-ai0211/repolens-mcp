@@ -2,11 +2,12 @@
   "name": "repolens-mcp",
   "displayName": "RepoLens MCP",
   "description": "Give AI agents a safe lens into your codebase. A local, read-only MCP server for VS Code.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "jupiter-ai0211",
   "license": "MIT",
+  "icon": "media/icon.png",
   "engines": {
-    "vscode": "^1.101.0",
+    "vscode": "^1.96.0",
     "node": ">=20"
   },
   "categories": [
@@ -93,7 +94,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.0",
-    "@types/vscode": "^1.101.0",
+    "@types/vscode": "^1.96.0",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "@vscode/vsce": "^3.2.0",
