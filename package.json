@@ -1,0 +1,100 @@
+{
+  "name": "repolens-mcp",
+  "displayName": "RepoLens MCP",
+  "description": "Give AI agents a safe lens into your codebase. A local, read-only MCP server for VS Code.",
+  "version": "0.1.0",
+  "publisher": "repolens",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.101.0",
+    "node": ">=20"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "mcp",
+    "model context protocol",
+    "ai",
+    "agent",
+    "read-only",
+    "repo inspection"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/repolens/repolens-mcp.git"
+  },
+  "main": "./dist/extension/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "repolensProvider",
+        "label": "RepoLens MCP"
+      }
+    ],
+    "configuration": {
+      "title": "RepoLens MCP",
+      "properties": {
+        "repolens.maxResults": {
+          "type": "number",
+          "default": 100,
+          "description": "Maximum number of results returned by scanning tools."
+        },
+        "repolens.maxFileSizeKb": {
+          "type": "number",
+          "default": 1024,
+          "description": "Maximum size (in KB) of a file that RepoLens will read its contents from."
+        },
+        "repolens.ignoreDirectories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            ".git",
+            "dist",
+            "build"
+          ],
+          "description": "Additional directories to ignore when scanning the workspace."
+        },
+        "repolens.enableExperimentalTools": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable experimental, not-yet-stable RepoLens tools."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "check-types": "tsc --noEmit -p .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "package": "vsce package",
+    "vscode:prepublish": "npm run check-types && npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "@types/vscode": "^1.101.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "@vscode/vsce": "^3.2.0",
+    "esbuild": "^0.28.1",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  }
+}
