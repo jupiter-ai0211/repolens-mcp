@@ -8,6 +8,16 @@ VS Code AI agents focused, **read-only** tools to inspect a project: structure,
 scripts, `.env` gaps, TODOs, framework detection, and large files — without
 unrestricted shell access.
 
+## Demo
+
+A 10-second look at RepoLens answering codebase questions inside Cursor:
+
+![RepoLens MCP in action — Cursor agent using RepoLens tools to inspect a repo](media/repolens_mcp_cursor_10s_demo.gif)
+
+**The flow:** install the extension → open your repo → ask the Cursor agent a
+question (e.g. *"Use RepoLens to give me a project overview"*) → it answers using
+local, read-only context.
+
 ## Features
 
 - **Project overview** – structure and important-file signals at a glance
@@ -88,6 +98,18 @@ Press `F5` in VS Code to launch an Extension Development Host, open a sample
 workspace, then start **RepoLens MCP** from the MCP server management UI and ask
 your agent things like *"Use RepoLens to summarize this repo"* or *"Use RepoLens
 to compare my env files"*.
+
+## Reporting issues
+
+Found a bug or have a feature request? Please
+[open an issue on GitHub](https://github.com/jupiter-ai0211/repolens-mcp/issues).
+
+To help us reproduce and fix it faster, include:
+
+- your VS Code / Cursor version and OS;
+- the RepoLens MCP extension version;
+- the steps to reproduce (and the tool or prompt you used);
+- what you expected vs. what actually happened.
 
 ## License
 
