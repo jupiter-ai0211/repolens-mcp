@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { registerMcpProvider } from "./registerMcpProvider.js";
+import { registerCursorMcp } from "./registerCursorMcp.js";
 
 let output: vscode.LogOutputChannel | undefined;
 
@@ -9,23 +10,35 @@ export function activate(context: vscode.ExtensionContext): void {
 
   output.info("RepoLens MCP extension activated.");
 
-  // The finalized MCP server definition provider API ships in VS Code 1.101+.
-  // We declare a lower engine for broader marketplace visibility (e.g. forks),
-  // so probe for the API at runtime and degrade gracefully if it is missing.
+  let registered = false;
+
+  // Path 1: VS Code's finalized MCP server definition provider API (1.101+).
   const lm = (vscode as unknown as { lm?: { registerMcpServerDefinitionProvider?: unknown } }).lm;
-  if (!lm || typeof lm.registerMcpServerDefinitionProvider !== "function") {
-    output.error(
-      "This editor does not support MCP server definition providers. " +
-        "Please update to VS Code 1.101 or later (or a fork with MCP API support).",
-    );
-    void vscode.window.showErrorMessage(
-      "RepoLens MCP requires an editor with the MCP API (VS Code 1.101 or later).",
-    );
-    return;
+  if (lm && typeof lm.registerMcpServerDefinitionProvider === "function") {
+    registerMcpProvider(context, output);
+    output.info("RepoLens registered via the VS Code MCP provider API.");
+    registered = true;
   }
 
-  registerMcpProvider(context, output);
-  output.info("RepoLens MCP server provider registered.");
+  // Path 2: Cursor's extension MCP API. Cursor does not implement the VS Code
+  // provider API above, so this is how the server auto-registers in Cursor
+  // without the user editing any mcp.json file.
+  if (registerCursorMcp(context, output)) {
+    output.info("RepoLens registered via the Cursor MCP extension API.");
+    registered = true;
+  }
+
+  if (!registered) {
+    output.error(
+      "This editor exposes neither the VS Code MCP provider API nor the " +
+        "Cursor MCP extension API, so RepoLens could not register its server. " +
+        "Update to VS Code 1.101+ or a recent Cursor build.",
+    );
+    void vscode.window.showErrorMessage(
+      "RepoLens MCP could not register: this editor lacks a supported MCP " +
+        "extension API (needs VS Code 1.101+ or a recent Cursor).",
+    );
+  }
 }
 
 export function deactivate(): void {

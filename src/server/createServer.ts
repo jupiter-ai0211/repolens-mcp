@@ -7,7 +7,7 @@ import { registerDetectProjectStack } from "./tools/detectProjectStack.js";
 import { registerFindLargeFiles } from "./tools/findLargeFiles.js";
 
 export const SERVER_NAME = "repolens";
-export const SERVER_VERSION = "0.1.0";
+export const SERVER_VERSION = "0.1.2";
 
 /**
  * Creates a fully configured RepoLens MCP server with all v0.1 tools
