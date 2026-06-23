@@ -117,3 +117,13 @@ To help us reproduce and fix it faster, include:
 ## License
 
 [MIT](./LICENSE)
+
+## Star this project
+
+If RepoLens MCP is useful to you, please consider supporting it:
+
+- ⭐ [Star the repo on GitHub](https://github.com/jupiter-ai0211/repolens-mcp) — it helps others discover the project.
+- 👍 Rate and review the extension on the [Open VSX Registry](https://open-vsx.org/extension/jupiter-ai0211/repolens-mcp) (used by Cursor).
+- 📣 Share it with teammates who give AI agents access to their codebase.
+
+Every star and review keeps the project growing. Thank you!
