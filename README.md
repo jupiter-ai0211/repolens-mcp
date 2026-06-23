@@ -2,6 +2,9 @@
 
 > Give AI agents a safe lens into your codebase.
 
+[![Report an issue](https://img.shields.io/badge/Report%20an%20issue-GitHub-blue?logo=github)](https://github.com/jupiter-ai0211/repolens-mcp/issues)
+&nbsp;[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+
 RepoLens MCP is a VS Code extension that ships a local [Model Context
 Protocol](https://modelcontextprotocol.io) server called **`repolens`**. It gives
 VS Code AI agents focused, **read-only** tools to inspect a project: structure,
