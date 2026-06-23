@@ -15,7 +15,7 @@ unrestricted shell access.
 
 A 10-second look at RepoLens answering codebase questions inside Cursor:
 
-![RepoLens MCP in action — Cursor agent using RepoLens tools to inspect a repo](media/repolens_mcp_cursor_10s_demo.gif)
+![RepoLens MCP in action — Cursor agent using RepoLens tools to inspect a repo](https://raw.githubusercontent.com/jupiter-ai0211/repolens-mcp/v0.1.3/media/repolens_mcp_cursor_10s_demo.gif)
 
 **The flow:** install the extension → open your repo → ask the Cursor agent a
 question (e.g. *"Use RepoLens to give me a project overview"*) → it answers using
