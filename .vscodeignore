@@ -15,4 +15,3 @@ vitest.config.ts
 **/*.map
 **/*.ts
 !dist/**/*.js
-media/repolens_mcp_cursor_10s_demo.gif
