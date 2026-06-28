@@ -5,6 +5,19 @@ All notable changes to **RepoLens MCP** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2026-06-28
+
+### Added
+
+- **Star this project** section in the README with links to star the GitHub
+  repo and rate the extension on the [Open VSX Registry](https://open-vsx.org/extension/jupiter-ai0211/repolens-mcp).
+
+### Changed
+
+- Compressed the demo GIF (`media/repolens_mcp_cursor_10s_demo.gif`) to reduce
+  package size and load time.
+- Updated the README demo GIF reference to the `v0.1.4` raw URL.
+
 ## [0.1.3] - 2026-06-22
 
 ### Added
@@ -71,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - esbuild bundling for a self-contained VSIX, plus publisher metadata, repo
   URLs, and Open VSX publishing support.
 
+[0.1.4]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.0...v0.1.1
