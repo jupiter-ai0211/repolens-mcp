@@ -15,7 +15,7 @@ unrestricted shell access.
 
 A 10-second look at RepoLens answering codebase questions inside Cursor:
 
-![RepoLens MCP in action — Cursor agent using RepoLens tools to inspect a repo](https://raw.githubusercontent.com/jupiter-ai0211/repolens-mcp/v0.1.3/media/repolens_mcp_cursor_10s_demo.gif)
+![RepoLens MCP in action — Cursor agent using RepoLens tools to inspect a repo](https://raw.githubusercontent.com/jupiter-ai0211/repolens-mcp/v0.1.4/media/repolens_mcp_cursor_10s_demo.gif)
 
 **The flow:** install the extension → open your repo → ask the Cursor agent a
 question (e.g. *"Use RepoLens to give me a project overview"*) → it answers using
@@ -117,3 +117,13 @@ To help us reproduce and fix it faster, include:
 ## License
 
 [MIT](./LICENSE)
+
+## Star this project
+
+If RepoLens MCP is useful to you, please consider supporting it:
+
+- ⭐ [Star the repo on GitHub](https://github.com/jupiter-ai0211/repolens-mcp) — it helps others discover the project.
+- 👍 Rate and review the extension on the [Open VSX Registry](https://open-vsx.org/extension/jupiter-ai0211/repolens-mcp) (used by Cursor).
+- 📣 Share it with teammates who give AI agents access to their codebase.
+
+Every star and review keeps the project growing. Thank you!
