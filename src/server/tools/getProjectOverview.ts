@@ -5,6 +5,8 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { getWorkspaceRoot } from "../core/workspace.js";
 import { ignoredDirectories, DEFAULT_MAX_FILES } from "../core/limits.js";
 import { jsonResult, errorResult } from "../core/output.js";
+import { fileExists } from "../core/fileExists.js";
+import { detectProjectStack } from "./detectProjectStack.js";
 
 export interface ProjectOverview {
   workspaceName: string;
@@ -16,9 +18,23 @@ export interface ProjectOverview {
     dockerfile: boolean;
     dockerCompose: boolean;
     tsconfig: boolean;
+    githubActions: boolean;
   };
   topLevelDirectories: string[];
   summaryHints: string[];
+  detectedStack: {
+    languages: string[];
+    frameworks: string[];
+    testing: string[];
+    ci: string[];
+  };
+  quickHealth: {
+    hasReadme: boolean;
+    hasTests: boolean;
+    hasEnvExample: boolean;
+    hasCi: boolean;
+    hasDocker: boolean;
+  };
   truncated: boolean;
 }
 
@@ -73,6 +89,7 @@ export function getProjectOverview(
     dockerfile: has("Dockerfile"),
     dockerCompose: COMPOSE_NAMES.some((n) => has(n)),
     tsconfig: has("tsconfig.json"),
+    githubActions: fileExists(root, ".github/workflows"),
   };
 
   const summaryHints: string[] = [];
@@ -103,12 +120,30 @@ export function getProjectOverview(
     summaryHints.push("Containerized (Docker)");
   }
 
+  const stack = detectProjectStack(root);
+  const detectedStack = {
+    languages: stack.languages,
+    frameworks: stack.frameworks,
+    testing: stack.testing,
+    ci: stack.ci,
+  };
+
+  const quickHealth = {
+    hasReadme: importantFiles.readme,
+    hasTests: stack.testing.length > 0,
+    hasEnvExample: importantFiles.envExample,
+    hasCi: stack.ci.length > 0,
+    hasDocker: stack.containerization.length > 0,
+  };
+
   return {
     workspaceName: path.basename(root) || root,
     rootFiles,
     importantFiles,
     topLevelDirectories,
     summaryHints,
+    detectedStack,
+    quickHealth,
     truncated,
   };
 }

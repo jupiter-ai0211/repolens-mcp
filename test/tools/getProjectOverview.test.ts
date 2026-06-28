@@ -26,4 +26,15 @@ describe("getProjectOverview", () => {
     expect(overview.rootFiles.length).toBeLessThanOrEqual(1);
     expect(overview.truncated).toBe(true);
   });
+
+  it("includes detected stack and quick-health intelligence", () => {
+    const overview = getProjectOverview(fixture("vite-react"));
+    expect(overview.importantFiles.githubActions).toBe(true);
+    expect(overview.detectedStack.frameworks).toContain("React");
+    expect(overview.detectedStack.testing).toContain("Vitest");
+    expect(overview.detectedStack.ci).toContain("GitHub Actions");
+    expect(overview.quickHealth.hasReadme).toBe(true);
+    expect(overview.quickHealth.hasTests).toBe(true);
+    expect(overview.quickHealth.hasCi).toBe(true);
+  });
 });

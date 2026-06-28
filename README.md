@@ -7,8 +7,9 @@
 
 RepoLens MCP is a VS Code extension that ships a local [Model Context
 Protocol](https://modelcontextprotocol.io) server called **`repolens`**. It gives
-VS Code AI agents focused, **read-only** tools to inspect a project: structure,
-scripts, `.env` gaps, TODOs, framework detection, and large files — without
+VS Code AI agents focused, **read-only** tools to understand how a project is
+built, tested, containerized, and documented — structure, scripts, `.env` gaps,
+TODOs, dependencies, tests, CI/CD, Docker, ports, and docs — all without
 unrestricted shell access.
 
 ## Demo
@@ -23,12 +24,18 @@ local, read-only context.
 
 ## Features
 
-- **Project overview** – structure and important-file signals at a glance
+- **Project overview** – structure, important files, detected stack, and quick health
 - **Package script inspection** – package manager + how to run/build/test/lint
 - **`.env` safety checks** – compare `.env` and `.env.example` by **keys only**
 - **TODO/FIXME scanner** – find `TODO`/`FIXME`/`HACK`/`XXX`/`BUG`/`SECURITY`
 - **Framework detection** – React, Next.js, Vite, NestJS, Laravel, Django, Docker…
 - **Large file detection** – spot files that bloat diffs and slow agents
+- **Dependency intelligence** – categorizes important dependencies by purpose
+- **Test setup detection** – frameworks, config files, scripts, and test files
+- **CI/CD detection** – providers, workflow triggers/jobs, and pipeline steps
+- **Docker & Compose inspection** – base images, services, ports, env **keys only**
+- **Port detection** – likely app/service ports with confidence and reasons
+- **README analysis** – section structure, badges, and missing recommended sections
 
 ## Why RepoLens?
 
@@ -41,12 +48,18 @@ RepoLens provides safe, structured, limited project inspection instead.
 
 | Tool | Description |
 | --- | --- |
-| `get_project_overview` | Summarizes workspace structure and important files |
+| `get_project_overview` | Summarizes structure, important files, detected stack, and quick health |
 | `inspect_package_scripts` | Shows the package manager and available scripts |
 | `compare_env_files` | Compares `.env` and `.env.example` without leaking values |
 | `find_todos` | Finds `TODO`/`FIXME`/`HACK`/`XXX`/`BUG`/`SECURITY` comments |
-| `detect_project_stack` | Detects languages, frameworks, and tooling |
+| `detect_project_stack` | Aggregates languages, frameworks, testing, CI, Docker, databases & services |
 | `find_large_files` | Finds large files (metadata only) |
+| `inspect_dependencies` | Categorizes important dependencies by purpose (names + versions only) |
+| `inspect_tests` | Detects test frameworks, config files, scripts, and test files |
+| `inspect_ci` | Detects CI/CD providers and workflow triggers/jobs/steps |
+| `inspect_docker` | Summarizes Dockerfile and Compose services (env **keys only**) |
+| `detect_ports` | Infers likely app/service ports with confidence and reasons |
+| `inspect_readme` | Analyzes README structure and missing recommended sections |
 
 ## How it works
 

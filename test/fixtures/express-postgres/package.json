@@ -1,0 +1,22 @@
+{
+  "name": "express-postgres-api",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts --port 4000",
+    "start": "node dist/server.js",
+    "test": "vitest run",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "express": "^4.19.0",
+    "pg": "^8.11.0",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0",
+    "supertest": "^7.0.0",
+    "eslint": "^9.0.0",
+    "ts-node-dev": "^2.0.0"
+  }
+}

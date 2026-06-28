@@ -35,4 +35,25 @@ describe("detectProjectStack", () => {
     expect(stack.packageManager).toBe("npm");
     expect(stack.tooling).toContain("Jest");
   });
+
+  it("aggregates v0.2 intelligence for a full-stack project", () => {
+    const stack = detectProjectStack(fixture("next-fullstack"));
+    expect(stack.ecosystems).toContain("node");
+    expect(stack.runtime).toContain("Node.js");
+    expect(stack.frameworks).toContain("Next.js");
+    expect(stack.testing).toEqual(
+      expect.arrayContaining(["Jest", "Playwright"]),
+    );
+    expect(stack.containerization).toEqual(
+      expect.arrayContaining(["Docker", "Docker Compose"]),
+    );
+    expect(stack.databases).toContain("PostgreSQL");
+    expect(stack.services).toContain("Redis");
+    expect(stack.confidence.framework).toBe("high");
+  });
+
+  it("aggregates CI signals from GitHub Actions", () => {
+    const stack = detectProjectStack(fixture("vite-react"));
+    expect(stack.ci).toContain("GitHub Actions");
+  });
 });
