@@ -31,3 +31,19 @@ export interface DetectorResult {
 }
 
 export type Detector = (ctx: DetectionContext) => DetectorResult;
+
+/** Confidence level shared by all v0.2 intelligence detectors. */
+export type DetectionConfidence = "low" | "medium" | "high";
+
+/**
+ * Generic, consistent wrapper for a v0.2 detection result. Carries the typed
+ * payload plus how confident we are and which files informed the conclusion.
+ */
+export interface Detection<T> {
+  data: T;
+  confidence: DetectionConfidence;
+  /** Workspace-relative file paths that contributed to this detection. */
+  sources: string[];
+  /** Non-fatal issues (e.g. unparsable config) surfaced honestly to the AI. */
+  warnings?: string[];
+}

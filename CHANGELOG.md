@@ -5,6 +5,55 @@ All notable changes to **RepoLens MCP** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-06-28
+
+**Better Project Intelligence.** This release expands RepoLens from basic
+workspace inspection into deeper, still **read-only** project intelligence.
+
+### Added
+
+- `inspect_dependencies` — categorizes important dependencies by purpose
+  (frontend, backend, testing, database, auth, build, …) with names and
+  versions only; never dumps the full manifest.
+- `inspect_tests` — detects test frameworks (Vitest, Jest, Playwright,
+  Cypress, …), test-related scripts, config files, test directories, example
+  test files, and an estimated test file count.
+- `inspect_ci` — detects CI/CD providers (GitHub Actions, GitLab CI, CircleCI,
+  Azure Pipelines, …) and approximate workflow triggers, jobs, and
+  install/lint/test/build/docker/deploy steps.
+- `inspect_docker` — summarizes Dockerfile base images, exposed ports, and
+  multi-stage builds, plus Compose services with ports, `depends_on`, volumes,
+  and environment **keys only**.
+- `detect_ports` — infers likely application and service ports from Compose
+  mappings, `EXPOSE`, `.env` `PORT` keys, Vite config, `listen()` calls,
+  package scripts, and framework defaults, each with a confidence and reason.
+- `inspect_readme` — analyzes README structure: section headings, missing
+  recommended sections, badges, link/code-block counts, and length.
+
+### Changed
+
+- `detect_project_stack` now aggregates the new detectors and reports
+  `ecosystems`, `runtime`, `testing`, `ci`, `containerization`, `databases`,
+  `services`, and rough `confidence` levels (existing fields preserved).
+- `get_project_overview` now includes a `detectedStack` summary, a
+  `quickHealth` snapshot, and a `githubActions` important-file signal.
+
+### Internal
+
+- New shared foundation: `Detection<T>` result types, `safeReadFile`,
+  `safeReadYaml`, `fileExists`, dependency-category map, and dedicated
+  Dockerfile/Compose parsers.
+- Added the `yaml` dependency for robust Compose/workflow parsing (bundled into
+  the server via esbuild).
+- New fixtures (`next-fullstack`, `express-postgres`, `no-config-project`,
+  `bad-json-project`) and detector tests (54 passing).
+
+### Safety
+
+- RepoLens remains read-only: no shell execution, no file writes, and no secret
+  values — Docker and `.env` inspection return **keys only**, and path
+  traversal/symlink-escape protections still apply.
+
 ## [0.1.4] - 2026-06-28
 
 ### Added
@@ -84,6 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - esbuild bundling for a self-contained VSIX, plus publisher metadata, repo
   URLs, and Open VSX publishing support.
 
+[0.2.0]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.1...v0.1.2

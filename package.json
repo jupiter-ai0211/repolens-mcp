@@ -2,7 +2,7 @@
   "name": "repolens-mcp",
   "displayName": "RepoLens MCP",
   "description": "Give AI agents a safe lens into your codebase. A local, read-only MCP server for VS Code.",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "publisher": "jupiter-ai0211",
   "license": "MIT",
   "icon": "media/icon.png",
@@ -90,6 +90,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",
+    "yaml": "^2.9.0",
     "zod": "^3.25.0"
   },
   "devDependencies": {
