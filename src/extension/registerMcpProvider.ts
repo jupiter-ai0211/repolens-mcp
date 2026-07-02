@@ -74,7 +74,7 @@ export function registerMcpProvider(
         "node",
         [serverPath],
         env,
-        "0.2.0",
+        "0.2.1",
       );
       if (root) {
         definition.cwd = vscode.Uri.file(root);

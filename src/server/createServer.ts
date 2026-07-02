@@ -13,7 +13,7 @@ import { registerDetectPorts } from "./tools/detectPorts.js";
 import { registerInspectReadme } from "./tools/inspectReadme.js";
 
 export const SERVER_NAME = "repolens";
-export const SERVER_VERSION = "0.2.0";
+export const SERVER_VERSION = "0.2.1";
 
 /**
  * Creates a fully configured RepoLens MCP server with all tools registered.

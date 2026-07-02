@@ -31,7 +31,7 @@ local, read-only context.
 - **Framework detection** – React, Next.js, Vite, NestJS, Laravel, Django, Docker…
 - **Large file detection** – spot files that bloat diffs and slow agents
 - **Dependency intelligence** – categorizes important dependencies by purpose
-- **Test setup detection** – frameworks, config files, scripts, and test files
+- **Test setup detection** – frameworks, languages, config/manifest files, scripts, and test files (15+ stacks)
 - **CI/CD detection** – providers, workflow triggers/jobs, and pipeline steps
 - **Docker & Compose inspection** – base images, services, ports, env **keys only**
 - **Port detection** – likely app/service ports with confidence and reasons
@@ -55,7 +55,7 @@ RepoLens provides safe, structured, limited project inspection instead.
 | `detect_project_stack` | Aggregates languages, frameworks, testing, CI, Docker, databases & services |
 | `find_large_files` | Finds large files (metadata only) |
 | `inspect_dependencies` | Categorizes important dependencies by purpose (names + versions only) |
-| `inspect_tests` | Detects test frameworks, config files, scripts, and test files |
+| `inspect_tests` | Detects test frameworks, languages, config/manifest files, scripts, and test files (15+ stacks) |
 | `inspect_ci` | Detects CI/CD providers and workflow triggers/jobs/steps |
 | `inspect_docker` | Summarizes Dockerfile and Compose services (env **keys only**) |
 | `detect_ports` | Infers likely app/service ports with confidence and reasons |
