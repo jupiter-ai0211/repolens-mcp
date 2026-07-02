@@ -5,6 +5,24 @@ All notable changes to **RepoLens MCP** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-07-01
+
+### Changed
+
+- `inspect_tests` now detects testing setup across **15+ languages and stacks**
+  (Python, Java, Kotlin, C#, Ruby, Go, Rust, PHP, Swift, Scala, Dart, Elixir,
+  Clojure, C/C++, Haskell, Perl, Lua, R, and more) — not only JavaScript and
+  TypeScript. It reads ecosystem manifests (`pyproject.toml`, `pom.xml`,
+  `go.mod`, `Gemfile`, `Cargo.toml`, `composer.json`, `*.csproj`, …), config
+  files, and language-specific test file patterns.
+- `inspect_tests` response now includes a `languages` field listing inferred
+  test languages from configs, manifests, and discovered test files.
+
+### Internal
+
+- Added multi-language test fixtures (`python-pytest`, `go-module`,
+  `ruby-rspec`) and expanded `inspect_tests` test coverage (57 passing).
+
 ## [0.2.0] - 2026-06-28
 
 **Better Project Intelligence.** This release expands RepoLens from basic
@@ -133,6 +151,7 @@ workspace inspection into deeper, still **read-only** project intelligence.
 - esbuild bundling for a self-contained VSIX, plus publisher metadata, repo
   URLs, and Open VSX publishing support.
 
+[0.2.1]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.4...v0.2.0
 [0.1.4]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/jupiter-ai0211/repolens-mcp/compare/v0.1.2...v0.1.3

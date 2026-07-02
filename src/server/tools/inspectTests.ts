@@ -9,10 +9,11 @@ export function registerInspectTests(server: McpServer): void {
     {
       title: "Inspect Tests",
       description:
-        "Detects how testing appears to be set up: frameworks (Vitest, Jest, " +
-        "Playwright, Cypress, ...), test-related package scripts, config files, " +
-        "test directories, example test files, and an estimated test file " +
-        "count. Read-only; never executes tests.",
+        "Detects how testing appears to be set up across many stacks (JavaScript, " +
+        "TypeScript, Python, Java, Kotlin, C#, Ruby, Go, Rust, PHP, Swift, Scala, " +
+        "Dart, Elixir, and more): frameworks, languages, test-related package " +
+        "scripts, config/manifest files, test directories, example test files, " +
+        "and an estimated test file count. Read-only; never executes tests.",
       inputSchema: {},
     },
     async () => {
